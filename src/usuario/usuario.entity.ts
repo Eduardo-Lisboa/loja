@@ -9,15 +9,15 @@ export class Usuario {
         this.senha = senha;
     }
 
-    public getNome() {
+    public get getNome() {
         return this.nome;
     }
 
-    public getEmail() {
+    public get getEmail() {
         return this.email;
     }
 
-    public getSenha() {
+    public get getSenha() {
         return this.senha;
     }
 }
