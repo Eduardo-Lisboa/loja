@@ -12,11 +12,37 @@ let UsuarioRepository = class UsuarioRepository {
     constructor() {
         this.usuarios = [];
     }
+    buscarUsuarioPorId(id) {
+        const usuario = this.usuarios.find(usuario => usuario.id === id);
+        if (!usuario) {
+            throw new Error("Usuário não encontrado");
+        }
+        return usuario;
+    }
     async salvar(usuario) {
         this.usuarios.push(usuario);
     }
     async listar() {
         return this.usuarios;
+    }
+    async existeComEmail(email) {
+        const possivelUsuario = this.usuarios.find(usuario => usuario.email === email);
+        return possivelUsuario !== undefined;
+    }
+    async atualizar(id, dadosDeAtualizacao) {
+        const usuario = this.buscarUsuarioPorId(id);
+        Object.entries(dadosDeAtualizacao).forEach(([chave, valor]) => {
+            if (chave === "id") {
+                return;
+            }
+            usuario[chave] = valor;
+        });
+        return usuario;
+    }
+    async deleta(id) {
+        const usuario = this.buscarUsuarioPorId(id);
+        this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+        return usuario;
     }
 };
 UsuarioRepository = __decorate([

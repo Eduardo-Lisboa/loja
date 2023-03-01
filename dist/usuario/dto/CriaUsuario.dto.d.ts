@@ -1,5 +1,4 @@
-export class UsuarioEntity {
-    id: string;
+export declare class CriaUsuarioDTO {
     nome: string;
     email: string;
     senha: string;
